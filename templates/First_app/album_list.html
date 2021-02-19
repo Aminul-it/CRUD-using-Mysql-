@@ -1,0 +1,25 @@
+{% extends 'First_app/base.html'%}
+{% block body_block %}
+<h1>This is Musician Info list </h1>
+<h4> Artist Name:-{{info_musician.first_name}}{{info_musician.last_name}}</h4>
+<h4>Instrument:-{{info_musician.instrument}}</h4>
+<h4>Average Rating:-{{rating_avg.numrs_star__avg}}</h4>
+<a href="{% url 'practise_app:edit_musician' artist_id=info_musician.id %}" class="btn btn-success btn-sm">Edit</a>
+<table class="table table-bordered">
+  <tr>
+    <th>Name Song</th>
+    <th>Relase Date</th>
+    <th>Rating </th>
+  </tr>
+  {% for albumtable in album_table %}
+  <tr>
+    <td><a href="{% url 'practise_app:edit_album' album_id=albumtable.id %}">{{albumtable.name}}</a></td>
+    <td>{{albumtable.relase_date|date:"M d, Y"}}</td>
+    <td>{{albumtable.numrs_star}}</td>
+  </tr>
+  {% endfor %}
+</table>
+<hr>
+<a href="{% url 'practise_app:delete_musician' artist_id=info_musician.id%}" class="btn btn-danger btn-sm" onclick="return confirm('Do you want delete Musician?')">Delete</a>
+
+{% endblock %}
